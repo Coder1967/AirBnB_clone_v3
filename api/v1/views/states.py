@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states", methods=["GET", "post"])
+@app_views.route("/states/", methods=["GET", "post"])
 def all_state():
     if request.method == 'GET':
         """ retrives all states stored """
@@ -61,5 +61,5 @@ def state(state_id):
         for key in req.keys():
             if key not in restricted_attr:
                 state.__dict__[key] = req[key]
-        storage.save()
+        state.save()
         return jsonify(state.to_dict())

@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/users", methods=["GET"])
+@app_views.route("/users/", methods=["GET"])
 def get_all_users():
     """ retrives all users stored """
     user_list = []
@@ -41,7 +41,7 @@ def del_user(user_id):
         return jsonify({})
 
 
-@app_views.route("/users", methods=["POST"])
+@app_views.route("/users/", methods=["POST"])
 def post_user():
     """ adds a new user """
     req = request.get_json()
@@ -70,5 +70,5 @@ def put_user(user_id):
     for key in req.keys():
         if key not in restricted_attr:
             user.__dict__[key] = req[key]
-    storage.save()
+    user.save()
     return jsonify(user.to_dict())

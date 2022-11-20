@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/amenities", methods=["GET"])
+@app_views.route("/amenities/", methods=["GET"])
 def get_all_amenities():
     """ retrives all amenities stored """
     amenity_list = []
@@ -41,7 +41,7 @@ def del_amenity(amenity_id):
         return jsonify({})
 
 
-@app_views.route("/amenities", methods=["POST"])
+@app_views.route("/amenities/", methods=["POST"])
 def post_amenity():
     """ posts a amenity """
     req = request.get_json()
@@ -68,5 +68,5 @@ def put_amenity(amenity_id):
     for key in req.keys():
         if key not in restricted_attr:
             amenity.__dict__[key] = req[key]
-    storage.save()
+    amenity.save()
     return jsonify(amenity.to_dict())

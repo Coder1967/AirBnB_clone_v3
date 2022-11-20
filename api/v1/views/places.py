@@ -11,7 +11,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/cities/<city_id>/places", methods=["GET"])
+@app_views.route("/cities/<city_id>/places/", methods=["GET"])
 def get_places(city_id):
     """ retrives a list of places of a city using the city's id"""
     all_place = storage.all(Place)
@@ -46,7 +46,7 @@ def del_place(place_id):
         return jsonify({})
 
 
-@app_views.route("/cities/<city_id>/places", methods=["POST"])
+@app_views.route("/cities/<city_id>/places/", methods=["POST"])
 def post_place(city_id):
     """ adds a place """
     req = request.get_json()
@@ -79,5 +79,5 @@ def put_place(place_id):
     for key in req.keys():
         if key not in restricted_attr:
             place.__dict__[key] = req[key]
-    storage.save()
+    place.save()
     return jsonify(place.to_dict())
