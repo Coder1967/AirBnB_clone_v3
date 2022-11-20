@@ -10,7 +10,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states/<state_id>/cities/", methods=["GET", 'POST'])
+@app_views.route("/states/<state_id>/cities", methods=["GET", 'POST'])
 def cities(state_id):
     """ retrives a list of cities of a state using the state's id"""
     if request.method == 'GET':

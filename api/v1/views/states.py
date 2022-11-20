@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states/", methods=["GET", "post"])
+@app_views.route("/states", methods=["GET", "post"])
 def all_state():
     if request.method == 'GET':
         """ retrives all states stored """
