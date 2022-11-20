@@ -7,7 +7,7 @@ from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
 
-from . import models
+import models
 from .views import app_views
 
 app = Flask(__name__)

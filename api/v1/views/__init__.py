@@ -2,7 +2,7 @@
 """
 Create a Blueprint and define it's url_prefix
 """
-from .. import models
+import models
 from flask import Blueprint
 
 storage = models.storage
@@ -20,5 +20,5 @@ from .places import *
 from .states import *
 from .cities import *
 from .amenities import *
-from .places_reviews import *
-from .places_amenities import *
+#from .places_reviews import *
+#from .places_amenities import *
