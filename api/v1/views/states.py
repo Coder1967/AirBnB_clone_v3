@@ -9,41 +9,17 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states", methods=["GET"])
-def get_all_state():
-    """ retrives all states stored """
-    state_list = []
+@app_views.route("/states", methods=["GET", "post"])
+def all_state():
+    if request.method == 'GET':
+        """ retrives all states stored """
+        state_list = []
 
-    for state in storage.all(State):
-        state_list.append(state.to_dict())
-    return jsonify(state_list)
-
-
-@app_views.route("/states/<state_id>", methods=["GET"])
-def get_state(state_id):
-    """ retrives a particular state using an id"""
-    state = storage.get(State, state_id)
-    if state is None:
-        abort(404)
+        for state in storage.all(State).values():
+            state_list.append(state.to_dict())
+        return jsonify(state_list)
     else:
-        return jsonify(state.to_dict())
-
-
-@app_views.route("/states/<state_id>", methods=["DELETE"])
-def del_state(state_id):
-    """  deletes a particular state using an id """
-    state = storage.get(State, state_id)
-    if state is None:
-        abort(404)
-    else:
-        storage.delete(state)
-        storage.save()
-        return jsonify({})
-
-
-@app_views.route("/states", methods=["POST"])
-def post_state():
-    """ posts a state """
+        """ posts a state """
     req = request.get_json()
     if req is None:
         abort(400, "Not a JSON")
@@ -54,19 +30,36 @@ def post_state():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route("/states/<state_id>", methods=["PUT"])
-def put_state(state_id):
-    """ updates a state"""
-    state = storage.get(State, state_id)
-    req = request.get_json()
-    restricted_attr = ['id', 'created_at', 'updated_at']
+@app_views.route("/states/<state_id>", methods=["GET", 'DELETE', 'PUT'])
+def state(state_id):
+    if request.method == 'GET':
+        """ retrives a particular state using an id"""
+        state = storage.get(State, state_id)
+        if state is None:
+            abort(404)
+        else:
+            return jsonify(state.to_dict())
+    elif request.method == 'DELETE':
+        """  deletes a particular state using an id """
+        state = storage.get(State, state_id)
+        if state is None:
+            abort(404)
+        else:
+            storage.delete(state)
+            storage.save()
+            return jsonify({})
+    else:
+        """ updates a state"""
+        state = storage.get(State, state_id)
+        req = request.get_json()
+        restricted_attr = ['id', 'created_at', 'updated_at']
 
-    if state is None:
-        abort(404)
-    if req is None:
-        abort(400, "Not a JSON")
-    for key in req.keys():
-        if key not in restricted_attr:
-            state.__dict__[key] = req[key]
-    storage.save()
-    return jsonify(state.to_dict())
+        if state is None:
+            abort(404)
+        if req is None:
+            abort(400, "Not a JSON")
+        for key in req.keys():
+            if key not in restricted_attr:
+                state.__dict__[key] = req[key]
+        storage.save()
+        return jsonify(state.to_dict())
