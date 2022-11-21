@@ -20,5 +20,5 @@ from .places import *
 from .states import *
 from .cities import *
 from .amenities import *
-#from .places_reviews import *
+from .places_reviews import *
 #from .places_amenities import *
