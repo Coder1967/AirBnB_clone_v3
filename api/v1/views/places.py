@@ -64,6 +64,9 @@ def post_place(city_id):
         abort(400, 'Not a JSON')
     if req.get('user_id') is None:
         abort(400, 'Missing user_id')
+    user = storage.get(User, req['user_id'])
+    if user is None:
+        abort(404)
     req['city_id'] = city.id
     new_place = Place(**req)
     new_place.save()
