@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/amenities", methods=["GET"])
+@app_views.route("/amenities", methods=["GET"], strict_slashes=False)
 def get_all_amenities():
     """ retrives all amenities stored """
     amenity_list = []
@@ -19,7 +19,8 @@ def get_all_amenities():
     return jsonify(amenity_list)
 
 
-@app_views.route("/amenities/<amenity_id>", methods=["GET"])
+@app_views.route("/amenities/<amenity_id>", methods=["GET"],
+                 strict_slash=False)
 def get_amenity(amenity_id):
     """ retrives a particular amenity instance using its id"""
     amenity = storage.get(Amenity, amenity_id)
@@ -29,7 +30,8 @@ def get_amenity(amenity_id):
         return jsonify(amenity.to_dict())
 
 
-@app_views.route("/amenities/<amenity_id>", methods=["DELETE"])
+@app_views.route("/amenities/<amenity_id>", methods=["DELETE"],
+                 strict_slashes=False)
 def del_amenity(amenity_id):
     """  deletes a particular amenity using an id """
     amenity = storage.get(Amenity, amenity_id)
@@ -41,7 +43,7 @@ def del_amenity(amenity_id):
         return jsonify({})
 
 
-@app_views.route("/amenities", methods=["POST"])
+@app_views.route("/amenities", methods=["POST"], strict_slashes=False)
 def post_amenity():
     """ posts a amenity """
     req = request.get_json()
@@ -54,7 +56,8 @@ def post_amenity():
     return jsonify(new_amenity.to_dict()), 201
 
 
-@app_views.route("/amenities/<amenity_id>", methods=["PUT"])
+@app_views.route("/amenities/<amenity_id>", methods=["PUT"],
+                 strict_slashes=False)
 def put_amenity(amenity_id):
     """ updates an amenity"""
     amenity = storage.get(Amenity, amenity_id)

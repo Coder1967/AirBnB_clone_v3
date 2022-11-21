@@ -10,7 +10,8 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states/<state_id>/cities", methods=["GET", 'POST'])
+@app_views.route("/states/<state_id>/cities", methods=["GET", 'POST'],
+                 strict_slashes=False)
 def cities(state_id):
     """ retrives a list of cities of a state using the state's id"""
     if request.method == 'GET':
@@ -37,7 +38,8 @@ def cities(state_id):
         return jsonify(new_city.to_dict()), 201
 
 
-@app_views.route('cities/<city_id>', methods=["GET", "DELETE", 'PUT'])
+@app_views.route('cities/<city_id>', methods=["GET", "DELETE", 'PUT'],
+                 strict_slashes=False)
 def city(city_id):
     if request.method == 'GET':
         """  retrives a city instance using its id"""

@@ -13,7 +13,9 @@ from . import app_views
 from flask import make_response
 from . import storage
 
-@app_views.route('/cities/<city_id>/places', methods=["GET"])
+
+@app_views.route('/cities/<city_id>/places', methods=["GET"],
+                 strict_slashes=False)
 def get_places(city_id):
     """ gets all places in a city"""
     city = storage.get(City, city_id)
@@ -27,7 +29,8 @@ def get_places(city_id):
     return jsonify(places)
 
 
-@app_views.route('/places/<place_id>', methods=['GET'])
+@app_views.route('/places/<place_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_place(place_id):
     """ retrives a place instance using its id"""
     place = storage.get(Place, place_id)
@@ -36,11 +39,12 @@ def get_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route('/places/<place_id>', methods=['DELETE'])
+@app_views.route('/places/<place_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def del_place(place_id):
     """deletes an instance of place"""
     place = storage.get(Place, place_id)
-    
+
     if place is None:
         abort(404)
     storage.delete(place)
@@ -48,7 +52,8 @@ def del_place(place_id):
     return jsonify({})
 
 
-@app_views.route('/cities/<city_id>/places', methods=['POST'])
+@app_views.route('/cities/<city_id>/places', methods=['POST'],
+                 strict_slashes=False)
 def post_place(city_id):
     """adds new place"""
     req = request.get_json()
