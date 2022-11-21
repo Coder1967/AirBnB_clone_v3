@@ -3,7 +3,6 @@
 
 from flask import request
 from flask import abort
-from flask import make_response
 from flask import jsonify
 from . import State
 from . import app_views
@@ -23,9 +22,9 @@ def all_state():
         """ posts a state """
     req = request.get_json()
     if req is None:
-        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+        return jsonify({'error': 'Not a JSON'}), 400
     if req.get('name') is None:
-        return make_response(jsonify({'error': 'Missing name'}), 400)
+        return jsonify({'error': 'Missing name'}), 400
     new_state = State(**req)
     new_state.save()
     return jsonify(new_state.to_dict()), 201
@@ -58,7 +57,7 @@ def state(state_id):
         if state is None:
             abort(404)
         if req is None:
-            return make_response(jsonify({'error': 'Not a JSON'}), 400)
+            return jsonify({'error': 'Not a JSON'}), 400
         for key in req.keys():
             if key not in restricted_attr:
                 state.__dict__[key] = req[key]
