@@ -23,7 +23,7 @@ def all_state():
     req = request.get_json()
     if req is None:
         return jsonify({'error': 'Not a JSON'}), 400
-    if req.get('name') is None:
+    if 'name' not in req:
         return jsonify({'error': 'Missing name'}), 400
     new_state = State(**req)
     new_state.save()

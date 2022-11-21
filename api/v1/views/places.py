@@ -60,7 +60,7 @@ def post_place(city_id):
         abort(404)
     if req is None:
         abort(400, 'Not a JSON')
-    if req.get('user_id') is None:
+    if 'user_id' in req:
         abort(400, 'Missing user_id')
     if 'name' not in req:
         abort(400, 'Missing name')

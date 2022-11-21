@@ -49,9 +49,9 @@ def post_user():
     req = request.get_json()
     if req is None:
         abort(400, "Not a JSON")
-    if req.get('email') is None:
+    if 'email'not in req:
         abort(400, 'Missing email')
-    if req.get('password') is None:
+    if 'password' not in req:
         abort(400, 'Missing password')
     new_user = User(**req)
     new_user.save()
