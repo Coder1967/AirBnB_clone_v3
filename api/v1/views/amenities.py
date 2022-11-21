@@ -48,9 +48,9 @@ def post_amenity():
     """ posts a amenity """
     req = request.get_json()
     if req is None:
-        abort(400, "Not a JSON")
+        return jsonify(error='Not a JSON'), 400
     if req.get('name') is None:
-        abort(400, 'Missing name')
+        return jsonify(error="Missing name"), 400
     new_amenity = Amenity(**req)
     new_amenity.save()
     return jsonify(new_amenity.to_dict()), 201
@@ -64,10 +64,10 @@ def put_amenity(amenity_id):
     req = request.get_json()
     restricted_attr = ['id', 'created_at', 'updated_at']
 
-    #if amenity is None:
-        #abort(404)
-    #if req is None:
-        #abort(400, "Not a JSON")
+    if amenity is None:
+        abort(404)
+    if req is None:
+        return jsonify(error='Not a JSON'), 400
     for key in req.keys():
         if key not in restricted_attr:
             amenity.__dict__[key] = req[key]
