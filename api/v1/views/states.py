@@ -58,7 +58,7 @@ def state(state_id):
         if state is None:
             abort(404)
         if req is None:
-            return jsonify({'error': 'Not a JSON'}), 400
+            return jsonify(error='Not a JSON'), 400
         for key in req.keys():
             if key not in restricted_attr:
                 state.__dict__[key] = req[key]
