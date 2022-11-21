@@ -20,7 +20,7 @@ def get_all_amenities():
 
 
 @app_views.route("/amenities/<amenity_id>", methods=["GET"],
-                 strict_slash=False)
+                 strict_slashes=False)
 def get_amenity(amenity_id):
     """ retrives a particular amenity instance using its id"""
     amenity = storage.get(Amenity, amenity_id)
