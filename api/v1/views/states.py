@@ -61,6 +61,6 @@ def state(state_id):
             return jsonify(error='Not a JSON'), 400
         for key in req.keys():
             if key not in restricted_attr:
-                state.__dict__[key] = req[key]
+                setattr(state, key, req[key])
         state.save()
         return jsonify(state.to_dict())
