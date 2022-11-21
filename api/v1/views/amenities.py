@@ -70,6 +70,6 @@ def put_amenity(amenity_id):
         return jsonify(error='Not a JSON'), 400
     for key in req.keys():
         if key not in restricted_attr:
-            amenity.__dict__[key] = req[key]
+            setattr(amenity, key, req[key])
     amenity.save()
     return jsonify(amenity.to_dict())

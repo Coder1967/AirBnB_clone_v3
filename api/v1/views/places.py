@@ -87,7 +87,7 @@ def put_place(place_id):
         abort(400, 'Not a JSON')
     for key in req.keys():
         if key not in restricted:
-            place.__dict__[key] = req[key]
+            setattr(place, key, req[key])
     return jsonify(place.to_dict())
 
 

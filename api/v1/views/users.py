@@ -72,6 +72,6 @@ def put_user(user_id):
         abort(400, "Not a JSON")
     for key in req.keys():
         if key not in restricted_attr:
-            user.__dict__[key] = req[key]
+            setattr(user, key, req[key])
     user.save()
     return jsonify(user.to_dict())

@@ -68,6 +68,6 @@ def city(city_id):
             abort(400, "Not a JSON")
         for key in req.keys():
             if key not in restricted_attr:
-                city.__dict__[key] = req[key]
+                setattr(city, key, req[key])
         city.save()
         return jsonify(city.to_dict())
