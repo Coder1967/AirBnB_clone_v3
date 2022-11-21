@@ -64,10 +64,10 @@ def put_amenity(amenity_id):
     req = request.get_json()
     restricted_attr = ['id', 'created_at', 'updated_at']
 
-    if amenity is None:
-        abort(404)
-    if req is None:
-        abort(400, "Not a JSON")
+    #if amenity is None:
+        #abort(404)
+    #if req is None:
+        #abort(400, "Not a JSON")
     for key in req.keys():
         if key not in restricted_attr:
             amenity.__dict__[key] = req[key]
