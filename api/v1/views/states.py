@@ -9,7 +9,7 @@ from . import app_views
 from . import storage
 
 
-@app_views.route("/states", methods=["GET", "post"])
+@app_views.route("/states", methods=["GET", "post"], strict_slashes=False)
 def all_state():
     if request.method == 'GET':
         """ retrives all states stored """
@@ -30,7 +30,7 @@ def all_state():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route("/states/<state_id>", methods=["GET", 'DELETE', 'PUT'])
+@app_views.route("/states/<state_id>", methods=["GET", 'DELETE', 'PUT'], strict_slashes=False)
 def state(state_id):
     if request.method == 'GET':
         """ retrives a particular state using an id"""
