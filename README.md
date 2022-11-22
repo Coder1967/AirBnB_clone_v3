@@ -127,7 +127,7 @@ TestBaseModel class:
 * `def test_user_class_docstring(self)` - Test for the User class docstring
 
   ## Added Feature
- #Added a RESTFUL API to query with the database using http calls. created using flask
+  Added a RESTFUL API to query with the database using http calls. created using flask
   it carries out the http methods on the database to query and manage the
   State, Cities, Amenities, User, Place, and Reviews objects
 
