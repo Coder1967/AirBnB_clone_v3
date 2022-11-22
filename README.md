@@ -245,7 +245,9 @@ No known bugs at this time.
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
-Nosakhare Aghedo - [Github](https://github.com/Coder1967) / [Twitter](https://twitter.com/NosakhareAghed1)\n
+  
+Nosakhare Aghedo - [Github](https://github.com/Coder1967) / [Twitter](https://twitter.com/NosakhareAghed1)
+  
 Hope Saviour - [Github](https://github.com/future-stacks) / [Twitter](https://twitter.com/hopeSavior)  
 Third part of Airbnb
 ## License
